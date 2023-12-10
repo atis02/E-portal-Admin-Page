@@ -51,7 +51,7 @@ export default function Home() {
                                 All
                             </Button>
                             <Button
-                                onClick={() => filterNews('Tesl')}
+                                onClick={() => filterNews('Programming')}
                                 sx={{
                                     borderRadius: '100px',
                                     border: '1px solid #24B47E',
@@ -59,10 +59,10 @@ export default function Home() {
                                     color: '#fff'
                                 }}
                             >
-                                Tesl
+                                Programming
                             </Button>
                             <Button
-                                onClick={() => filterNews('Business')}
+                                onClick={() => filterNews('Crypto')}
                                 sx={{
                                     borderRadius: '100px',
                                     border: '1px solid #24B47E',
@@ -70,7 +70,18 @@ export default function Home() {
                                     color: '#fff'
                                 }}
                             >
-                                Business
+                                Crypto
+                            </Button>
+                            <Button
+                                onClick={() => filterNews('AI')}
+                                sx={{
+                                    borderRadius: '100px',
+                                    border: '1px solid #24B47E',
+                                    backgroundColor: 'rgba(3, 101, 82, 0.16)',
+                                    color: '#fff'
+                                }}
+                            >
+                                AI
                             </Button>
                         </Stack>
                         <Stack direction='row' flexWrap='wrap' sx={{ gap: '10px' }} >
