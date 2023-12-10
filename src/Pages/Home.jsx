@@ -7,9 +7,9 @@ export default function Home() {
     const [filter, setFilter] = useState(data);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [category, setCategory] = useState([]);
 
     const baseUrl = 'https://repo.gozle.com.tm/eportalback';
-
     useEffect(() => {
         const getNews = async () => {
             setLoading(true);
@@ -23,6 +23,15 @@ export default function Home() {
                     return setError(error.message);
                 })
         };
+        const getCategory = async () => {
+            setLoading(true);
+            const categoryResponse = await axios.get(baseUrl + '/api/v1/categories').then((catResponse) => {
+                setCategory(catResponse.data);
+                setLoading(false);
+                console.log(catResponse.data);
+            })
+        }
+        getCategory();
         getNews();
     }, []);
 
@@ -50,39 +59,19 @@ export default function Home() {
                             >
                                 All
                             </Button>
-                            <Button
-                                onClick={() => filterNews('Programming')}
-                                sx={{
-                                    borderRadius: '100px',
-                                    border: '1px solid #24B47E',
-                                    backgroundColor: 'rgba(3, 101, 82, 0.16)',
-                                    color: '#fff'
-                                }}
-                            >
-                                Programming
-                            </Button>
-                            <Button
-                                onClick={() => filterNews('Crypto')}
-                                sx={{
-                                    borderRadius: '100px',
-                                    border: '1px solid #24B47E',
-                                    backgroundColor: 'rgba(3, 101, 82, 0.16)',
-                                    color: '#fff'
-                                }}
-                            >
-                                Crypto
-                            </Button>
-                            <Button
-                                onClick={() => filterNews('AI')}
-                                sx={{
-                                    borderRadius: '100px',
-                                    border: '1px solid #24B47E',
-                                    backgroundColor: 'rgba(3, 101, 82, 0.16)',
-                                    color: '#fff'
-                                }}
-                            >
-                                AI
-                            </Button>
+                            {category.map((category) => (
+                                <Button
+                                    key={category._id}
+                                    onClick={() => filterNews(category.name)}
+                                    sx={{
+                                        borderRadius: '100px',
+                                        border: '1px solid #24B47E',
+                                        backgroundColor: 'rgba(3, 101, 82, 0.16)',
+                                        color: '#fff'
+                                    }}
+                                >
+                                    {category.name}
+                                </Button>))}
                         </Stack>
                         <Stack direction='row' flexWrap='wrap' sx={{ gap: '10px' }} >
 
