@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/E-portal-Admin-Page/',
+  base: '/E-portal/',
   plugins: [react()],
 })
