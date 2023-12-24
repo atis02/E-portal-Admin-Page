@@ -47,7 +47,7 @@ export default function Home() {
         {error ? (<Typography textAlign='center' variant='h3' mt={10}>{error}</Typography>) :
             loading ? (<Stack direction='column' height='100%' mt={10} alignItems='center' sx={{ gap: '10px' }} > <CircularProgress />Loading...</Stack >)
                 : (
-                    <Box>
+                    <Box  >
                         <Stack direction='row' alignItems='center' m='10px 0 10px 0' spacing={2}>
                             <Button
                                 onClick={() => setFilter(data)}

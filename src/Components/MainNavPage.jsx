@@ -19,8 +19,8 @@ export default function MainNavPage() {
 
     return (
         <>
-            <Box backgroundColor='#000' color='#fff'>
-                <Stack width='20%' direction='row' minHeight='100vh'  >
+            <Box sx={{ backgroundColor: '#000', color: '#fff' }} >
+                <Stack direction='row' minHeight='100vh'  >
                     <Navbar />
                     <Routes >
                         <Route path='/contact' element={<Contact />} />

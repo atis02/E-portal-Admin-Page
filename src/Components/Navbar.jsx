@@ -1,15 +1,14 @@
-import { Stack } from '@mui/material';
+import { Stack, Box } from '@mui/material';
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import { Sidebar, Menu, MenuItem, menuClasses } from 'react-pro-sidebar';
 
 
 function Navbar() {
 
 
     return (
-        <Sidebar backgroundColor='#212121' style={{ border: '1px solid #212121' }} >
-            <Menu style={{ display: 'flex', height: '100%', alignItems: 'center', flexDirection: 'column' }}  >
+        <Box backgroundColor='#212121' style={{ border: '1px solid #212121' }} >
+            <Stack sx={{ display: 'flex', width: { lg: '250px', sm: '200px', xs: '100px' }, p: '0 10px 0 10px', height: '100%', alignItems: 'center', flexDirection: 'column' }}  >
                 <Stack direction='column' spacing='30px' pt='200px'>
                     <NavLink to='/' className='nav-link'>
                         <Stack direction='row' alignItems='center' spacing={2} >
@@ -44,8 +43,8 @@ function Navbar() {
                         </Stack>
                     </NavLink>
                 </Stack>
-            </Menu >
-        </Sidebar >
+            </Stack >
+        </Box >
     )
 }
 export default Navbar; 
