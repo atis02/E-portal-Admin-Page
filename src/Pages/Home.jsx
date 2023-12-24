@@ -10,6 +10,7 @@ export default function Home() {
     const [category, setCategory] = useState([]);
 
     const baseUrl = 'https://repo.gozle.com.tm/eportalback';
+
     useEffect(() => {
         const getNews = async () => {
             setLoading(true);
@@ -93,10 +94,9 @@ export default function Home() {
 
                                     <Stack direction='row' justifyContent='space-between' width='90%' p='10px'>
                                         <Stack direction='row'>
-
-                                            <img alt='' src='/images/heart-fill.svg' /><Typography color='#fff'>{news.like}</Typography>
+                                            <img alt='' src='/E-portal-Admin-Page/public/images/heart-fill.svg' /><Typography color='#fff'>{news.like}</Typography>
                                         </Stack>
-                                        <img alt='' src='/images/more-2-fill.svg' />
+                                        <img alt='' src='/E-portal-Admin-Page/public/images/more-2-fill.svg' />
                                     </Stack>
                                 </CardActionArea>
 

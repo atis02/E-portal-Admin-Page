@@ -24,7 +24,7 @@ export default function MainNavPage() {
                     <Navbar />
                     <Routes >
                         <Route path='/contact' element={<Contact />} />
-                        <Route path='/' element={<Header />} />
+                        <Route path='/E-portal-Admin-Page' element={<Header />} />
                         <Route path='/content' element={<AddContent />} />
                         <Route path='/category' element={<AddCategory />} />
                     </Routes>
