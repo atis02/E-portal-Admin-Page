@@ -94,9 +94,9 @@ export default function Home() {
 
                                     <Stack direction='row' justifyContent='space-between' width='90%' p='10px'>
                                         <Stack direction='row'>
-                                            <img alt='' src='/E-portal-Admin-Page/public/images/heart-fill.svg' /><Typography color='#fff'>{news.like}</Typography>
+                                            <img alt='' src='/images/heart-fill.svg' /><Typography color='#fff'>{news.like}</Typography>
                                         </Stack>
-                                        <img alt='' src='/E-portal-Admin-Page/public/images/more-2-fill.svg' />
+                                        <img alt='' src='/images/more-2-fill.svg' />
                                     </Stack>
                                 </CardActionArea>
 

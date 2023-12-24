@@ -11,7 +11,7 @@ export default function Header() {
                     Home
                 </Typography>
                 <Stack width='100%' height='80px' spacing={2} backgroundColor='#292929 ' borderRadius="20px" alignItems='center' direction='row' >
-                    <Stack pl='20px'><img src="/E-portal-Admin-Page//images/Frame.svg" alt="" /></Stack>
+                    <Stack pl='20px'><img src="/images/Frame.svg" alt="" /></Stack>
                     <TextField
                         id="input-with-icon-textfield"
                         placeholder='Search'
