@@ -4,4 +4,5 @@ export const navTitle = {
     fontSize: '32px',
     fontStyle: 'normal',
     fontWeight: '600',
+    mb: '20px',
 }

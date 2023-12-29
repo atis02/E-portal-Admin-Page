@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Box, Stack, Typography, Button, CircularProgress, CardActionArea, Card, CardActions, CardMedia, CardContent } from '@mui/material';
 import axios from 'axios'
+import { NavLink } from 'react-router-dom';
 export default function Home() {
 
     const [data, setData] = useState([]);
@@ -8,6 +9,8 @@ export default function Home() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [category, setCategory] = useState([]);
+    const [more, setMore] = useState(false);
+
 
     const baseUrl = 'https://repo.gozle.com.tm/eportalback';
 
@@ -39,7 +42,6 @@ export default function Home() {
     const filterNews = (cat) => {
         const updatedList = data.filter((x) => x.category_name === cat);
         setFilter(updatedList)
-
     }
 
 
@@ -47,7 +49,7 @@ export default function Home() {
         {error ? (<Typography textAlign='center' variant='h3' mt={10}>{error}</Typography>) :
             loading ? (<Stack direction='column' height='100%' mt={10} alignItems='center' sx={{ gap: '10px' }} > <CircularProgress />Loading...</Stack >)
                 : (
-                    <Box  >
+                    <Box    >
                         <Stack direction='row' alignItems='center' m='10px 0 10px 0' spacing={2}>
                             <Button
                                 onClick={() => setFilter(data)}
@@ -72,35 +74,45 @@ export default function Home() {
                                     }}
                                 >
                                     {category.name}
-                                </Button>))}
+                                </Button>
+                            ))}
                         </Stack>
                         <Stack direction='row' flexWrap='wrap' sx={{ gap: '10px' }} >
 
-                            {filter.map((news) => (
-                                <CardActionArea key={news._id} sx={{ width: '330px', minHeight: '350px', pt: '20px', color: '#fff', backgroundColor: '#292929', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' }}>
+                            {
+                                filter.length > 0 ? filter.map((news) => (
+                                    <CardActionArea key={news._id} sx={{ width: '330px', minHeight: '350px', pt: '20px', color: '#fff', backgroundColor: '#292929', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' }}>
 
-                                    <CardMedia
+                                        <CardMedia
 
-                                        sx={{ height: '238px', width: '300px' }}
-                                        image={`${baseUrl}/${news.image}`}
-                                        title="green iguana"
-                                        style={{ borderRadius: '10px' }}
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            {news.title}
-                                        </Typography>
-                                    </CardContent>
+                                            sx={{ height: '238px', width: '300px' }}
+                                            image={`${baseUrl}/${news.image}`}
+                                            title="green iguana"
+                                            style={{ borderRadius: '10px' }}
+                                        />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="div">
+                                                {news.title}
+                                            </Typography>
+                                        </CardContent>
 
-                                    <Stack direction='row' justifyContent='space-between' width='90%' p='10px'>
-                                        <Stack direction='row'>
-                                            <img alt='' src='/images/heart-fill.svg' /><Typography color='#fff'>{news.like}</Typography>
+                                        <Stack direction='row' justifyContent='space-between' width='90%' p='10px'>
+                                            <Stack direction='row'>
+                                                <img alt='' src='/images/heart-fill.svg' /><Typography color='#fff'>{news.like}</Typography>
+                                            </Stack>
+                                            <Stack>
+                                                <img alt='' onClick={() => setMore(!more)} src='/images/more-2-fill.svg' />
+                                                {more ?
+                                                    <NavLink to={news.source_link} >more</NavLink>
+                                                    : ''}
+                                            </Stack>
+
                                         </Stack>
-                                        <img alt='' src='/images/more-2-fill.svg' />
-                                    </Stack>
-                                </CardActionArea>
+                                    </CardActionArea>
 
-                            ))}
+                                )) : (<Typography textAlign='center' width='100%' mt='50px'>No News in this category</Typography>)
+                            }
+
                         </Stack>
 
                     </Box >)
