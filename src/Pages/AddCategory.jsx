@@ -9,11 +9,7 @@ export default function AddCategory() {
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
 
-
     const baseUrl = 'https://repo.gozle.com.tm/eportalback/api/v1';
-    // https://repo.gozle.com.tm/eportalback/api/v1/news?category=Programming
-
-
 
     const postCategory = async (event) => {
 
@@ -24,12 +20,12 @@ export default function AddCategory() {
                 "Content-Type": "application/json"
             }
         })
-            .then((res) => res.data.name === category ? window.location.reload() : 'error in adding')
+            .then((res) => res.data.name === category ? toast.success('successfully added') && window.location.reload() : toast.error(res.data.message))
             .catch(error => {
                 return console.log(error);
             })
         setLoading(false);
-        toast.success('successfully added')
+
 
 
     };
@@ -37,10 +33,9 @@ export default function AddCategory() {
         const getCategory = async () => {
             const categoryResponse = await axios.get(`${baseUrl}/categories`).then((catResponse) => {
                 setCategories(catResponse.data);
-                console.log(catResponse.data);
             })
         }
-        getCategory();
+        getCategory()
     }, []);
     const deleteCategory = async (id) => {
         axios.delete(`${baseUrl}/categories`, {
@@ -87,7 +82,7 @@ export default function AddCategory() {
             <Typography fontSize='25px' mt='20px'>
                 Delete Category:
             </Typography>
-            <Stack spacing={2} mt='10px'>
+            <Stack spacing={2} mt='10px' mb='30px'>
                 {categories.map((elem) => (
                     <Stack p='7px' borderRadius="10px" width='60%' key={elem._id} direction='row' alignItems='center' backgroundColor='#292929 ' justifyContent='space-between'>
                         <Typography>{elem.name}</Typography>

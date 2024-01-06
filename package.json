@@ -18,12 +18,16 @@
     "@mui/material": "^5.14.20",
     "@trendmicro/react-sidenav": "^0.5.0",
     "axios": "^1.6.2",
+    "mui-file-input": "^4.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-file-input": "^0.2.5",
     "react-hot-toast": "^2.4.1",
+    "react-material-file-upload": "^0.0.4",
     "react-pro-sidebar": "^1.1.0-alpha.1",
     "react-router-dom": "^6.20.1",
-    "react-sidenav": "^4.0.6"
+    "react-sidenav": "^4.0.6",
+    "react-uploader": "^3.43.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

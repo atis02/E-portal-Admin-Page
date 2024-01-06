@@ -13,7 +13,18 @@
 
 }
 
-.nav-link:focus {
+.active {
   color: #24B47E;
   fill: #24B47E;
+
+}
+
+.input-file {
+  background-color: #333;
+  border-radius: 10px;
+  color: aliceblue;
+}
+
+.input-file span {
+  color: #fff
 }
