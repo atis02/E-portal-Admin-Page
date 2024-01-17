@@ -9,7 +9,8 @@ export default function AddCategory() {
     const [category, setCategory] = useState('')
     const [categories, setCategories] = useState([])
 
-    const baseUrl = 'https://repo.gozle.com.tm/eportalback/api/v1';
+    const baseUrl = import.meta.env.VITE_BASE_URL;
+
 
     const postCategory = async (event) => {
 

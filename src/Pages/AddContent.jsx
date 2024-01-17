@@ -26,8 +26,7 @@ export default function AddContent() {
         setAge(event.target.value);
     };
 
-    const baseUrl = 'https://repo.gozle.com.tm/eportalback/api/v1';
-
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     useEffect(() => {
         const getCategory = async () => {
             const categoryResponse = await axios.get(`${baseUrl}/categories`).then((catResponse) => {
@@ -48,10 +47,10 @@ export default function AddContent() {
             title: title,
             description: description,
             image: image,
-            source_title: sourceTitle,
-            source_link: sourceLink,
-            category_id: age._id,
-            category_name: age.name
+            sourceTitle: sourceTitle,
+            sourceLink: sourceLink,
+            categoryId: age._id,
+            categoryName: age.name
         }, {
             headers: {
                 "Content-Type": "multipart/form-data"
