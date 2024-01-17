@@ -12,7 +12,8 @@ export default function Home() {
     const [more, setMore] = useState(false);
 
 
-    const baseUrl = 'https://repo.gozle.com.tm/eportalback';
+    const baseUrl = import.meta.env.VITE_BASE_URL;
+
 
     useEffect(() => {
         const getNews = async () => {
