@@ -11,14 +11,13 @@ export default function Home() {
     const [category, setCategory] = useState([]);
     const [more, setMore] = useState(false);
 
-
     const baseUrl = import.meta.env.VITE_BASE_URL;
-
+    const img_Url = import.meta.env.VITE_IMG_BASE_URL;
 
     useEffect(() => {
         const getNews = async () => {
             setLoading(true);
-            const response = await axios.get(baseUrl + '/api/v1/news').then((response) => {
+            const response = await axios.get(baseUrl + '/news').then((response) => {
                 setData(response.data.news);
                 setFilter(response.data.news);
                 setLoading(false);
@@ -30,7 +29,7 @@ export default function Home() {
         };
         const getCategory = async () => {
             setLoading(true);
-            const categoryResponse = await axios.get(baseUrl + '/api/v1/categories').then((catResponse) => {
+            const categoryResponse = await axios.get(baseUrl + '/categories').then((catResponse) => {
                 setCategory(catResponse.data);
                 setLoading(false);
                 console.log(catResponse.data);
@@ -87,7 +86,7 @@ export default function Home() {
                                         <CardMedia
 
                                             sx={{ height: '238px', width: '300px' }}
-                                            image={`${baseUrl}/${news.image}`}
+                                            image={`${img_Url}/${news.image}`}
                                             title="green iguana"
                                             style={{ borderRadius: '10px' }}
                                         />

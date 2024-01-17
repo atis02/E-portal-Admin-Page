@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Box, Stack, Typography, MenuItem, TextField, Button, CircularProgress, FormControl, InputLabel, Select, styled, } from '@mui/material';
+import { Container, Box, Stack, Typography, MenuItem, TextField, Button, CircularProgress, FormControl, InputLabel, Select, styled, CardActionArea, CardMedia, CardContent, } from '@mui/material';
 import { navTitle } from '../Components/data.mjs';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
@@ -9,6 +9,7 @@ export default function AddContent() {
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState();
     const [categories, setCategories] = useState([]);
+    const [news, setNews] = useState([]);
     const [age, setAge] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -27,6 +28,8 @@ export default function AddContent() {
     };
 
     const baseUrl = import.meta.env.VITE_BASE_URL;
+    const img_Url = import.meta.env.VITE_IMG_BASE_URL;
+
     useEffect(() => {
         const getCategory = async () => {
             const categoryResponse = await axios.get(`${baseUrl}/categories`).then((catResponse) => {
@@ -34,10 +37,26 @@ export default function AddContent() {
                 console.log(catResponse.data);
             })
         }
+        const getNews = async () => {
+            const categoryResponse = await axios.get(`${baseUrl}/news`).then((newsResp) => {
+                setNews(newsResp.data.news);
+            })
+        }
+        getNews()
         getCategory()
     }, []);
 
+    const deleteNews = async (id) => {
+        await axios.delete(`${baseUrl}/news`, {
+            data: { id }
+        })
+            .then((res) => {
+                res.data === 'success' ? toast.success('successfully deleted') : toast.error('error')
 
+            })
+
+
+    }
     const postNews = async (e) => {
         setLoading(true);
         e.preventDefault();
@@ -55,10 +74,11 @@ export default function AddContent() {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
-        }).then((res) => console.log(res.data))
-            .catch(error => {
-                return console.log(error);
-            })
+        }).then((res) => {
+            console.log(res);
+            res.status === 200 ? window.location.reload() : toast.error('error')
+            toast.success('successfully added')
+        })
         setLoading(false);
     }
     return (
@@ -66,7 +86,7 @@ export default function AddContent() {
             <Toaster />
 
             <Typography sx={navTitle}>
-                AddContent
+                ADD CONTENT
             </Typography>
 
             <form onSubmit={postNews} style={{ width: '100%', gap: '20px', backgroundColor: '#292929 ', borderRadius: "20px", alignItems: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
@@ -175,6 +195,41 @@ export default function AddContent() {
                     {loading ? (<CircularProgress disableShrink />) : 'Send'}
                 </Button>
             </form>
-        </Container>
+
+            <Typography sx={navTitle} mt={5}>
+                DELETE CONTENT
+            </Typography>
+            <Stack direction='row' flexWrap='wrap' sx={{ gap: '10px' }} >
+
+                {
+                    news.length > 0 ? news.map((item) => (
+                        <CardActionArea key={item._id} sx={{ width: '330px', minHeight: '350px', pt: '20px', color: '#fff', backgroundColor: '#292929', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' }}>
+
+                            <CardMedia
+
+                                sx={{ height: '238px', width: '300px' }}
+                                image={`${img_Url}/${item.image}`}
+                                title="green iguana"
+                                style={{ borderRadius: '10px' }}
+                            />
+                            <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    {item.title}
+                                </Typography>
+                            </CardContent>
+
+                            <Stack direction='row' alignItems='center' justifyContent='space-between' width='90%' p='10px'>
+                                <Stack direction='row'>
+                                    <img alt='' src='/images/heart-fill.svg' /><Typography color='#fff'>{item.like}</Typography>
+                                </Stack>
+
+                                <Button sx={{ color: '#fff', backgroundColor: 'red' }} onClick={() => deleteNews(item._id)}>Delete Content</Button>
+                            </Stack>
+                        </CardActionArea>
+                    )) : (<Typography textAlign='center' width='100%' mt='50px'>No News in this category</Typography>)
+                }
+            </Stack>
+
+        </Container >
     )
 }
